@@ -1,0 +1,25 @@
+.NavItem {
+    /* border: 1px solid black; */
+    height: 43px;
+    height: 100%;
+    display: flex;
+    align-content: center;
+}
+
+.NavItem:hover {
+    background-color: #c27a47;
+}
+
+.Active {
+    border-bottom: 2px dotted;
+}
+
+.NavItem a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    height: 100%;
+    padding: 14px 10px 10px 10px;
+    /* border: solid 1px red; */
+}
+

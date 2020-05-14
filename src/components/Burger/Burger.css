@@ -1,0 +1,17 @@
+.Burger {
+    width: 100%;
+    height: 380px;
+    border-bottom: 2px solid;
+    overflow: auto;
+    margin-top: 51px;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.Burger > * {
+    margin: 5px auto;
+}
+
+.Instruction {
+    font-size: 20px;
+}
