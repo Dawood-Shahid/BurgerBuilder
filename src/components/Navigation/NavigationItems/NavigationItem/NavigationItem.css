@@ -6,14 +6,6 @@
     align-content: center;
 }
 
-.NavItem:hover {
-    background-color: #c27a47;
-}
-
-.Active {
-    border-bottom: 2px dotted;
-}
-
 .NavItem a {
     text-decoration: none;
     color: white;
@@ -21,5 +13,41 @@
     height: 100%;
     padding: 14px 10px 10px 10px;
     /* border: solid 1px red; */
+}
+
+.NavItem:hover {
+    background-color: #c27a47;
+}
+
+.Active {
+    border-bottom: 2px dotted;
+    padding: 14px 10px 8px 10px;
+}
+
+@media(max-width: 500px) {
+    .NavItem {
+        height: 43px;
+        height: 100%;
+        align-content: center;
+    }
+    
+    .Active {
+        border: none;
+    }
+    
+    .NavItem a {
+        text-decoration: none;
+        color: rgb(122, 61, 17);
+        display: block;
+        height: 100%;
+        width: 100%;
+        padding: 14px 10px 10px 10px;
+    }
+    
+    .NavItem a:hover {
+        padding: 14px 10px 8px 10px;
+        background-color: rgb(248, 206, 150);
+        border-bottom: 2px dotted rgb(122, 61, 17);
+    }
 }
 

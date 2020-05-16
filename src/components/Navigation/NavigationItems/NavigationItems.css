@@ -3,4 +3,18 @@
     display: flex;
     color: white;
     align-items: center;
+    background-color: rgb(122, 61, 17);
 }
+
+@media(max-width: 500px) {
+    .NavItems {
+        list-style: none;
+        display: block;
+        color: white;
+        background-color: white;
+        /* border: 1px solid black; */
+        margin-top: 1rem;
+    }
+
+}
+
