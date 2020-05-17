@@ -15,3 +15,15 @@
 .Instruction {
     font-size: 20px;
 }
+
+@media(max-width: 1440px) {
+    .Burger {
+        height: 367px;
+    }
+}
+
+@media(max-width: 1024px) {
+    .Burger {
+        height: 293px;
+    }
+}

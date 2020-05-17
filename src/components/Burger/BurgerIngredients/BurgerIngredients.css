@@ -111,3 +111,55 @@
   background: linear-gradient(#bf3813, #c45e38);
   margin: 0 auto;
 }
+
+@media (max-width: 1024px) {
+  .BurgerTop {
+    height: 110px;
+  }
+
+  .BurgerBottom {
+    height: 60px;
+  }
+
+  .Meat {
+    height: 20px;
+  }
+
+  .Cheese {
+    height: 15px;
+  }
+
+  .Salad {
+    height: 12px;
+  }
+
+  .Bacon {
+    height: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .BurgerTop {
+    height: 80px;
+  }
+
+  .BurgerBottom {
+    height: 50px;
+  }
+
+  .Meat {
+    height: 18px;
+  }
+
+  .Cheese {
+    height: 15px;
+  }
+
+  .Salad {
+    height: 12px;
+  }
+
+  .Bacon {
+    height: 10px;
+  }
+}

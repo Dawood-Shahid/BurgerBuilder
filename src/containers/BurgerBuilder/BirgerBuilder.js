@@ -5,7 +5,6 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
-import { object } from 'prop-types';
 
 const ingredientsPrice = {
     Salad: 30,
@@ -27,13 +26,13 @@ class BurgerBuilder extends Component {
         purchasing: false
     };
 
-    updatePurchaseableState (ingredients) {
+    updatePurchaseableState(ingredients) {
         const ingredientsObj = ingredients;
         const ingredientsArray = Object.keys(ingredientsObj);
-        const ingredientsValues = ingredientsArray.map( key => {
+        const ingredientsValues = ingredientsArray.map(key => {
             return ingredientsObj[key];
         });
-        const sum = ingredientsValues.reduce( (acc, cur) => {
+        const sum = ingredientsValues.reduce((acc, cur) => {
             return acc + cur;
         }, 0);
         const purchaseable = sum > 0;
@@ -103,18 +102,18 @@ class BurgerBuilder extends Component {
     }
 
     render() {
-        const disableInfo = {...this.state.ingredients}
+        const disableInfo = { ...this.state.ingredients }
         for (let key in disableInfo) {
             disableInfo[key] = disableInfo[key] <= 0    // set true and false in disableInfo object's key value
         }
-        
+
         return (
             <Auxilary>
                 <Modal state={this.state.purchasing} clicked={this.cancelPurchaseHandler}>
-                    <OrderSummary 
+                    <OrderSummary
                         ingredients={this.state.ingredients}
                         total={this.state.totalPrice}
-                        cancel={this.cancelPurchaseHandler} 
+                        cancel={this.cancelPurchaseHandler}
                         continue={this.continuePurchaseHandler}
                     />
                 </Modal>
