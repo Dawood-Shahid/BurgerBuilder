@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import './Button.css'
+import './Button.css';
 
 const button = (props) => (
     <button onClick={props.clicked} className={['Button', props.btnType].join(' ')}>
@@ -8,4 +8,4 @@ const button = (props) => (
     </button>
 )
 
-export default button
+export default button;

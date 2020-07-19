@@ -32,30 +32,30 @@ class BurgerBuilder extends Component {
         loader: false
     };
 
-    componentDidMount () {
+    componentDidMount() {
         axios.get('https://myburger-f9cc2.firebaseio.com/ingredients.json')
-        .then( response => {
-            // console.log(response.data)
-            this.setState({
-                ingredients: response.data
-            })
-
-            axios.get('https://myburger-f9cc2.firebaseio.com/prices/totalPrice.json')
-            .then( response => {
+            .then(response => {
                 // console.log(response.data)
                 this.setState({
-                    totalPrice: response.data
+                    ingredients: response.data
                 })
-            
-                axios.get('https://myburger-f9cc2.firebaseio.com/prices/ingredientsPrice.json')
-                .then( response => {
-                    // console.log(response.data)
-                    this.setState({
-                        ingredientsPrice: response.data
-                    })
-                });
+
+                axios.get('https://myburger-f9cc2.firebaseio.com/prices/totalPrice.json')
+                    .then(response => {
+                        // console.log(response.data)
+                        this.setState({
+                            totalPrice: response.data
+                        })
+
+                        axios.get('https://myburger-f9cc2.firebaseio.com/prices/ingredientsPrice.json')
+                            .then(response => {
+                                // console.log(response.data)
+                                this.setState({
+                                    ingredientsPrice: response.data
+                                })
+                            });
+                    });
             });
-        });
     }
 
     updatePurchaseableState(ingredients) {
@@ -93,24 +93,25 @@ class BurgerBuilder extends Component {
 
     continuePurchaseHandler = () => {
         // alert("Continue")
-        this.setState({ loader: true })
-        const orderData = {
-            ingredients: {...this.state.ingredients},
-            totalAmmount: this.state.totalPrice
-        }
-        axios.post('https://myburger-f9cc2.firebaseio.com/Orders.json', orderData)
-            .then(response => {
-                this.setState({ 
-                    loader: false,
-                    purchasing: false
-                })
-            })
-            .catch(error => {
-                this.setState({ 
-                    loader: false,
-                    purchasing: false
-                })
-            });
+        this.props.history.push('/checkout');
+        // this.setState({ loader: true })
+        // const orderData = {
+        //     ingredients: { ...this.state.ingredients },
+        //     totalAmmount: this.state.totalPrice
+        // }
+        // axios.post('https://myburger-f9cc2.firebaseio.com/Orders.json', orderData)
+        //     .then(response => {
+        //         this.setState({
+        //             loader: false,
+        //             purchasing: false
+        //         })
+        //     })
+        //     .catch(error => {
+        //         this.setState({
+        //             loader: false,
+        //             purchasing: false
+        //         })
+        //     });
     }
 
     addIngretientsHandler = (type) => {
@@ -198,7 +199,7 @@ class BurgerBuilder extends Component {
                 <Modal state={this.state.purchasing} clicked={this.cancelPurchaseHandler}>
                     {orderSummary}
                 </Modal>
-                    {burger}
+                {burger}
             </Auxilary>
         );
     };

@@ -1,0 +1,15 @@
+.CheckoutSummary {
+    margin: auto;
+    text-align: center;
+    margin-top: 77px;
+}
+
+.CheckoutSummary h3 {
+    font-size: 22px;
+}
+
+.CheckoutBurger {
+    width: 80%;
+    margin: auto;
+    box-shadow: 0px 10px 14px -1px rgba(0,0,0,0.39);
+}
