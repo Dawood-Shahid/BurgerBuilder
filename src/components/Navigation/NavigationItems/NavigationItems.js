@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import NavItem from './NavigationItem/NavigationItem'
-import './NavigationItems.css'
+import NavItem from './NavigationItem/NavigationItem';
+import './NavigationItems.css';
 
 const navigationItems = () => {
     return (

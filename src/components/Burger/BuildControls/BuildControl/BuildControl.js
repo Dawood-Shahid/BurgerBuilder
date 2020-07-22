@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import './BuildControl.css'
+import './BuildControl.css';
 
 const buildControl = (props) => {
     return (

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import Auxilary from '../../../HOC/Auxilary'
-import Button from '../../UI/Button/Button'
-import './OrderSummary.css'
+import Auxilary from '../../../HOC/Auxilary';
+import Button from '../../UI/Button/Button';
+import './OrderSummary.css';
 
 const orderSummary = (props) => {
     let ingredientSummary = Object.keys(props.ingredients);

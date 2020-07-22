@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import Auxilary from '../../HOC/Auxilary';
+import Header from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import './Layout.css';
-import Header from '../../components/Navigation/Toolbar/Toolbar'
-import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer'
 
 class Layout extends Component {
     state = {

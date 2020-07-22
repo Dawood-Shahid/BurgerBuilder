@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Auxilary from '../../HOC/Auxilary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
-import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
-import axios from 'axios';
+import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 
@@ -29,7 +29,7 @@ class BurgerBuilder extends Component {
         totalPrice: null,  //fetching from firebase
         purchaseable: false,
         purchasing: false,
-        loader: false
+        error: false
     };
 
     componentDidMount() {
@@ -55,7 +55,13 @@ class BurgerBuilder extends Component {
                                 })
                             });
                     });
-            });
+            })
+            .catch(error => (
+                // console.log(error)
+                this.setState({
+                    error: true
+                })
+            ));
     }
 
     updatePurchaseableState(ingredients) {
@@ -93,32 +99,37 @@ class BurgerBuilder extends Component {
 
     continuePurchaseHandler = () => {
         // alert("Continue")
-        this.props.history.push('/checkout');
-        // this.setState({ loader: true })
-        // const orderData = {
-        //     ingredients: { ...this.state.ingredients },
-        //     totalAmmount: this.state.totalPrice
-        // }
-        // axios.post('https://myburger-f9cc2.firebaseio.com/Orders.json', orderData)
-        //     .then(response => {
-        //         this.setState({
-        //             loader: false,
-        //             purchasing: false
-        //         })
-        //     })
-        //     .catch(error => {
-        //         this.setState({
-        //             loader: false,
-        //             purchasing: false
-        //         })
-        //     });
+        // this.props.history.push('/checkout');
+        const queryParam = [];
+        // const queryParamTest = [];
+
+        for (let key in this.state.ingredients) {
+            queryParam.push(encodeURIComponent(key) + '=' + encodeURIComponent(this.state.ingredients[key]));
+            //["Bacon=1", "Cheese=1", "Meat=1", "Salad=1"]
+            // queryParamTest.push(`${key}=${this.state.ingredients[key]}`);
+            //["Bacon=1", "Cheese=1", "Meat=1", "Salad=1"]
+        }
+        // console.log(queryParam);
+        // console.log(queryParamTest);
+
+        queryParam.push(`price=` + this.state.totalPrice);
+        const queryString = queryParam.join('&');
+
+        // console.log(this.props.history);
+
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     }
 
     addIngretientsHandler = (type) => {
         const updatedState = { ...this.state.ingredients };
         const previousCount = this.state.ingredients[type];
+        // console.log(previousCount);
         const currentCount = previousCount + 1;
         updatedState[type] = currentCount;
+        // console.log(updatedState[type]);
         const initialPrice = this.state.totalPrice;
         const ingredientPrice = this.state.ingredientsPrice[type];
         const totalAmmount = initialPrice + ingredientPrice;
@@ -159,9 +170,16 @@ class BurgerBuilder extends Component {
         }
 
         let orderSummary = null;
+        let spinner = <Spinner />
+
+        if (this.state.error) {
+            // console.log(`reeoe`);
+            spinner = <h2>Something Went Wrong...</h2>
+        }
+
         let burger = (
             <Modal state={true} clicked={this.cancelPurchaseHandler}>
-                <Spinner />
+                {spinner}
             </Modal>
         );
 
@@ -188,10 +206,6 @@ class BurgerBuilder extends Component {
                     continue={this.continuePurchaseHandler}
                 />
             )
-        }
-
-        if (this.state.loader) {
-            orderSummary = <Spinner />
         }
 
         return (

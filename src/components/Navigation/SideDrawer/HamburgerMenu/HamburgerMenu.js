@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import './HamburgerMenu.css'
+import './HamburgerMenu.css';
 
 const hamburgerMenu = (props) => {
     return (

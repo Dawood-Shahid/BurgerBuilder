@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import Logo from '../../assets/Images/Logo.png'
-import './Logo.css'
+import Logo from '../../assets/Images/Logo.png';
+import './Logo.css';
 
 const logo = () => {
     return (

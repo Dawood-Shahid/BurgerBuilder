@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
 import { Route, Switch } from 'react-router-dom';
 
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BirgerBuilder';
 import Checkout from './containers/Checkout/Checkout';
+import './App.css';
 
 function App() {
   return (
