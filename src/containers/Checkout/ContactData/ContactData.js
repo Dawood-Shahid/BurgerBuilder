@@ -24,17 +24,18 @@ class ContactData extends Component {
 
     cancelPurchaseHandler = () => {
         this.setState({
-            purchasing: false
+            purchasing: false,
+            loader: false
         })
     }
 
     orderHandler = (event) => {
         event.preventDefault();
         this.setState({
-            purchasing: true, 
+            purchasing: true,
             loader: true
         });
-        
+
         // <Modal state={this.state.purchasing} clicked={this.cancelPurchaseHandler}>
         //     <Spinner />
         // </Modal>
@@ -45,13 +46,13 @@ class ContactData extends Component {
             ingredients: { ...this.props.ingredients },
             totalAmmount: this.props.price
         }
-        axios.post('https://myburger-f9cc2.firebaseio.com/Orders', orderData)
+        axios.post('https://myburger-f9cc2.firebaseio.com/Orders.json', orderData)
             .then(response => {
                 this.setState({
                     loader: false,
                     purchasing: false
                 });
-                // this.props.history.push('/');
+                this.props.history.push('/');
             })
             .catch(error => {
                 this.setState({
@@ -61,33 +62,18 @@ class ContactData extends Component {
     }
 
     render() {
-        
-        let form = (
-            <form>
-                <input className='InputField' type='text' name='name' placeholder='Name' />
-                <input className='InputField' type='email' name='email' placeholder='Mail' />
-                <input className='InputField' type='text' name='contact' placeholder='Contact' />
-                <input className='InputField' type='text' name='address' placeholder='Address' />
-                <Button btnType='Success' clicked ={this.orderHandler} >ORDER</Button>
-            </form>    
-        );
-        
+
+        let loader;
+
         if (this.state.loader) {
             let message = <Spinner />
-         
+
             if (this.state.error) {
                 message = <h2>Something Went Wrong...</h2>
             }
-         
-            form = (
+
+            loader = (
                 <Auxilary>
-                    <form>
-                        <input className='InputField' type='text' name='name' placeholder='Name' />
-                        <input className='InputField' type='email' name='email' placeholder='Mail' />
-                        <input className='InputField' type='text' name='contact' placeholder='Contact' />
-                        <input className='InputField' type='text' name='address' placeholder='Address' />
-                        <Button btnType='Success' clicked ={this.orderHandler} >ORDER</Button>
-                    </form>
                     <Modal state={this.state.purchasing} clicked={this.cancelPurchaseHandler}>
                         {message}
                     </Modal>
@@ -97,8 +83,15 @@ class ContactData extends Component {
 
         return (
             <div className='ContactForm'>
+                {loader}
                 <h3>Enter Contact Data</h3>
-                {form}
+                <form>
+                    <input className='InputField' type='text' name='name' placeholder='Name' />
+                    <input className='InputField' type='email' name='email' placeholder='Mail' />
+                    <input className='InputField' type='text' name='contact' placeholder='Contact' />
+                    <input className='InputField' type='text' name='address' placeholder='Address' />
+                    <Button btnType='Success' clicked={this.orderHandler} >ORDER</Button>
+                </form>
             </div>
         )
     }

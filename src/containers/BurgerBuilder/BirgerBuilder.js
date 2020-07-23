@@ -53,7 +53,7 @@ class BurgerBuilder extends Component {
                                 this.setState({
                                     ingredientsPrice: response.data
                                 })
-                            });
+                            })
                     });
             })
             .catch(error => (
