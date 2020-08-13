@@ -5,6 +5,7 @@ import Button from '../../../components/UI/Button/Button';
 import Modal from '../../../components/UI/Modal/Modal';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Auxilary from '../../../HOC/Auxilary';
+import Input from '../../../components/UI/Input/Input'
 import '../ContactData/ContactData.css';
 
 class ContactData extends Component {
@@ -44,6 +45,7 @@ class ContactData extends Component {
         // console.log(this.props.price);
         const orderData = {
             ingredients: { ...this.props.ingredients },
+            // contact data
             totalAmmount: this.props.price
         }
         axios.post('https://myburger-f9cc2.firebaseio.com/Orders.json', orderData)
@@ -86,10 +88,10 @@ class ContactData extends Component {
                 {loader}
                 <h3>Enter Contact Data</h3>
                 <form>
-                    <input className='InputField' type='text' name='name' placeholder='Name' />
-                    <input className='InputField' type='email' name='email' placeholder='Mail' />
-                    <input className='InputField' type='text' name='contact' placeholder='Contact' />
-                    <input className='InputField' type='text' name='address' placeholder='Address' />
+                    <Input inputtype='input' type='text' name='name' placeholder='Name' />
+                    <Input inputtype='input' type='email' name='email' placeholder='Mail' />
+                    <Input inputtype='input' type='text' name='contact' placeholder='Contact' />
+                    <Input inputtype='input' type='text' name='address' placeholder='Address' />
                     <Button btnType='Success' clicked={this.orderHandler} >ORDER</Button>
                 </form>
             </div>

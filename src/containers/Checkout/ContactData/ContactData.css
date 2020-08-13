@@ -6,15 +6,7 @@
 }
 
 .ContactForm h3 {
+    padding-top: 10px;
     margin-bottom: 15px;
     font-size: 22px;
-}
-
-.InputField {
-    display: block;
-    width: 250px;
-    margin: 5px auto;
-    padding: 5px;
-    border-radius: 5px;
-    border: 0.5px solid;
 }

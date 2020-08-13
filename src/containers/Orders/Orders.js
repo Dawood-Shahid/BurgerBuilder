@@ -25,7 +25,7 @@ class Orders extends Component {
                         id: key
                     })
                 }
-                // console.log(fetchOrders)
+                console.log(fetchOrders)
                 this.setState({ orders: fetchOrders });
             })
             .catch(error => {

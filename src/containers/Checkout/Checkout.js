@@ -52,7 +52,7 @@ class Checkout extends Component {
     }
 
     checkoutContinuedHandler = () => {
-        this.props.history.replace('/checkout/contact-data');
+        this.props.history.replace('/checkout/contact-data');  //for rendering the contact form
     }
 
     render() {
