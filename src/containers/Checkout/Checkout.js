@@ -39,7 +39,10 @@ class Checkout extends Component {
         }
         // console.log(price);
         // console.log(ingredients);
-        this.setState({ ingredients: ingredients , totalPrice: price});
+        this.setState({ 
+            ingredients: ingredients, 
+            totalPrice: price
+        });
 
         // console.log(this.props.history);
         // console.log(`match path => ${this.props.match.path}`);

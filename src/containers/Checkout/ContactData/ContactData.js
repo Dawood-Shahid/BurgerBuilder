@@ -12,11 +12,49 @@ class ContactData extends Component {
     state = {
         ingredients: null,
         totalPrice: null,
-        contact: {
-            name: '',
-            email: '',
-            contactNo: '',
-            address: ''
+        customerDetails: {
+            name: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Name'
+                },
+                value: ''
+            },
+            email: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Your E-Mail'
+                },
+                value: ''
+            },
+            contactNo: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Contact Number'
+                },
+                value: ''
+            },
+            address: {
+                elementType: 'textarea',
+                elementConfig: {
+                    // type: 'text',
+                    placeholder: 'Address'
+                },
+                value: ''
+            },
+            deliceryMethod: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: 'fastest', displayValue: 'Fastest'},
+                        {value: 'cheapest', displayValue: 'Cheapest'}
+                    ]
+                },
+                value: 'fastest'
+            },
         },
         loader: false,
         purchasing: false,
@@ -43,11 +81,17 @@ class ContactData extends Component {
 
         // console.log(this.props.ingredients);
         // console.log(this.props.price);
+        const customerData = {}
+        for (let key in this.state.customerDetails) {
+            customerData[key] = this.state.customerDetails[key].value
+        }
+        // console.log(customerData)
         const orderData = {
             ingredients: { ...this.props.ingredients },
-            // contact data
+            customerDetails: customerData,
             totalAmmount: this.props.price
         }
+        // console.log(orderData)
         axios.post('https://myburger-f9cc2.firebaseio.com/Orders.json', orderData)
             .then(response => {
                 this.setState({
@@ -61,6 +105,15 @@ class ContactData extends Component {
                     error: true
                 })
             });
+    }
+
+    inputChangedHandler = (event, inputIdentifier) => {
+        // console.log(event.target.value);
+        const updatedCustomerDetails = {...this.state.customerDetails}
+        const updatedFormField = {...updatedCustomerDetails[inputIdentifier]}
+        updatedFormField.value = event.target.value
+        updatedCustomerDetails[inputIdentifier] = updatedFormField
+        this.setState({customerDetails: updatedCustomerDetails})
     }
 
     render() {
@@ -83,16 +136,29 @@ class ContactData extends Component {
             )
         }
 
+        let customerDetailsArray = [];
+        for (let key in this.state.customerDetails) {
+            customerDetailsArray.push({
+                id: key,
+                configuration: this.state.customerDetails[key]
+            })
+        }
+
         return (
             <div className='ContactForm'>
                 {loader}
                 <h3>Enter Contact Data</h3>
-                <form>
-                    <Input inputtype='input' type='text' name='name' placeholder='Name' />
-                    <Input inputtype='input' type='email' name='email' placeholder='Mail' />
-                    <Input inputtype='input' type='text' name='contact' placeholder='Contact' />
-                    <Input inputtype='input' type='text' name='address' placeholder='Address' />
-                    <Button btnType='Success' clicked={this.orderHandler} >ORDER</Button>
+                <form onSubmit={this.orderHandler}>
+                    {customerDetailsArray.map( details => (
+                        <Input 
+                            key={details.id}
+                            elementType={details.configuration.elementType}
+                            elementConfig={details.configuration.elementConfig}
+                            value={details.configuration.value}
+                            changed={(event) => this.inputChangedHandler(event, details.id)}
+                        />
+                    ))}
+                    <Button btnType='Success'>ORDER</Button>
                 </form>
             </div>
         )
