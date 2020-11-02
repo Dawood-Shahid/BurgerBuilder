@@ -10,7 +10,7 @@ import './App.css';
 function App() {
   return (
     <div>
-    <h1 style={{margin:'50px 0 0 0'}}>New Commit</h1>
+    <h1 style={{margin:'50px 0 0 0'}}>Commit Update from Dawood</h1>
       <Layout>
         <Switch>
           <Route path='/checkout' component={ Checkout } />
