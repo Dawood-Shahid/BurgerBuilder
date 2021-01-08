@@ -4,9 +4,9 @@ import BurgerIngredients from './BurgerIngredients/BurgerIngredients';
 import './Burger.css';
 
 const burger = (props) => {
+    // console.log(props.ingredients);
     const ingredientArray = Object.keys(props.ingredients);    // it returns an array consists of given object keys
     // console.log(ingredientArray);
-    // console.log(props.ingredients);
 
     let ingredientList = ingredientArray.map(key => {
         // console.log([key]);
